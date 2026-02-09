@@ -7,8 +7,8 @@ import SearchBar from '../components/SearchBar.jsx';
     <img id="background" src={background.src} alt="" fetchpriority="high" />
     <main>
         <section id="hero">
-            <h1>
-                To get sarted, start writing an artist's name in the search bar.
+            <h1 id="hero-title">
+                To get started, start writing an artist's name in the search bar.
             </h1>
             <section id="links">
                 <SearchBar client:load />
@@ -16,6 +16,20 @@ import SearchBar from '../components/SearchBar.jsx';
         </section>
     </main>
 </div>
+
+<script>
+  window.addEventListener('searchComplete', () => {
+    const title = document.getElementById('hero-title');
+    if (title) {
+      title.style.transition = 'opacity 0.5s ease-out';
+      title.style.opacity = '0';
+      
+      setTimeout(() => {
+        title.style.display = 'none';
+      }, 500);
+    }
+  });
+</script>
 
 <style>
     #background {

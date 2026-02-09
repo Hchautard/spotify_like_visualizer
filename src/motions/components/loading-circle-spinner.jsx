@@ -30,15 +30,13 @@ function StyleSheet() {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                padding: 40px;
-                border-radius: 8px;
             }
 
             .spinner {
-                width: 50px;
-                height: 50px;
+                width: 24px;
+                height: 24px;
                 border-radius: 50%;
-                border: 4px solid var(--divider);
+                border: 4px solid #e0e0e0;
                 border-top-color: #ff0088;
                 will-change: transform;
             }
