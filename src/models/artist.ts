@@ -29,7 +29,7 @@ interface ArtistImages {
     strArtistBanner?: string | null;
 }
 
-class Artists {
+class Artist {
     idArtist?: string | null;
     strArtist?: string | null;
     strArtistStripped?: string | null;
@@ -57,6 +57,27 @@ class Artists {
     strLocked?: string | null;
     biographies?: ArtistBiographies;
     images?: ArtistImages;
+
+    constructor(data: Partial<Artists>) {
+        Object.assign(this, data);
+        // Initialisation des sous-objets si nécessaire
+        if (!this.biographies && data && !this.biographies === undefined) {
+            this.biographies = {};
+            Object.keys(data).forEach(key => {
+                if (key.startsWith('strBiography')) {
+                    this.biographies[key as keyof ArtistBiographies] = data[key as keyof Artist] as string;
+                }
+            });
+        }
+        if (!this.images && data) {
+            this.images = {};
+            Object.keys(data).forEach(key => {
+                if (key.startsWith('strArtist') && (key.includes('Thumb') || key.includes('Logo') || key.includes('Cutout') || key.includes('Clearart') || key.includes('Fanart') || key.includes('Banner'))) {
+                    this.images[key as keyof ArtistImages] = data[key as keyof Artist] as string;
+                }
+            });
+        }
+    }
 }
 
-export default Artists;
+export default Artist;
